@@ -1,11 +1,13 @@
 package com.admin.services;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import com.admin.entities.State;
 
 public interface StateService {
 	
-	public Iterable<State> getAllStates();
+	public List<State> getAllStates();
 
 	public State addState(State state);
 
@@ -13,5 +15,5 @@ public interface StateService {
 	
 	public void deleteState(Integer id);
 	
-	public Optional<State> getStateByStId(String stId);	
+	public Optional<State> getStateByStateId(String stId);	
 }

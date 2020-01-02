@@ -1,5 +1,8 @@
 package com.admin.services.impl;
+import java.util.List;
+
 import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +17,7 @@ public class CityServiceImpl implements CityService {
 	CityRepository cityRepository;
 
 	
-	public Iterable<City> getAllCity() {
+	public List<City> getAllCity() {
 		return cityRepository.findAll();
 	}
 	@Transactional

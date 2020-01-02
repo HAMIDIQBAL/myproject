@@ -1,10 +1,12 @@
 package com.admin.data;
+
 import java.util.Optional;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.admin.entities.State;
-
-public interface StateRepository extends CrudRepository<State, Integer> {
-	public Optional<State> findByStId(String stId);
+@Repository
+public interface StateRepository extends JpaRepository<State, Integer> {
+	public Optional<State> findByStateId(String stId);
 }

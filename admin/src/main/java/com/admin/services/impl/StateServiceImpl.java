@@ -1,4 +1,6 @@
 package com.admin.services.impl;
+
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -12,28 +14,34 @@ import com.admin.services.StateService;
 
 @Service
 public class StateServiceImpl implements StateService {
-	
+
 	@Autowired
 	StateRepository stateRepository;
-	
-	
-	public Iterable<State> getAllStates() {
+
+	@Override
+	public List<State> getAllStates() {
 		return stateRepository.findAll();
 	}
+
 	@Transactional
 	public State addState(State state) {
 		return stateRepository.save(state);
 	}
+
 	@Transactional
 	public State updateState(State state) {
 		return stateRepository.save(state);
 	}
+
 	@Transactional
 	public void deleteState(Integer id) {
 		stateRepository.deleteById(id);
 	}
-	@Override
-	public Optional<State> getStateByStId(String stId) {
-		return stateRepository.findByStId(stId);
+
+	
+	@Transactional
+	public Optional<State> getStateByStateId(String stId) {
+		return stateRepository.findByStateId(stId);
 	}
+
 }

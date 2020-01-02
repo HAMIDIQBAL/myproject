@@ -1,55 +1,48 @@
 package com.rms.entities;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "grouptab")
-public class Group {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	@Column(name = "gid")
-	private String gId;
-	@Column(name = "gname")
-	private String gName;
-	
-	/*
-	 * @OneToMany(mappedBy = "group") Item item;
-	 */
-	
-	public int getId() {
-		return id;
+
+@Table(name = "group")
+public class Group extends BaseEntity {
+	private String groupId;
+	private String groupName;
+
+	public Group() {
+		super();
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public String getGroupId() {
+		return groupId;
 	}
-	public String getgId() {
-		return gId;
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
-	public void setgId(String gId) {
-		this.gId = gId;
+
+	public String getGroupName() {
+		return groupName;
 	}
-	public String getgName() {
-		return gName;
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 	}
-	public void setgName(String gName) {
-		this.gName = gName;
+
+	@Override
+	public String toString() {
+		return "Group [groupId=" + groupId + ", groupName=" + groupName + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((gId == null) ? 0 : gId.hashCode());
-		result = prime * result + ((gName == null) ? 0 : gName.hashCode());
-		result = prime * result + id;
+		result = prime * result + ((groupId == null) ? 0 : groupId.hashCode());
+		result = prime * result + ((groupName == null) ? 0 : groupName.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -59,23 +52,17 @@ public class Group {
 		if (getClass() != obj.getClass())
 			return false;
 		Group other = (Group) obj;
-		if (gId == null) {
-			if (other.gId != null)
+		if (groupId == null) {
+			if (other.groupId != null)
 				return false;
-		} else if (!gId.equals(other.gId))
+		} else if (!groupId.equals(other.groupId))
 			return false;
-		if (gName == null) {
-			if (other.gName != null)
+		if (groupName == null) {
+			if (other.groupName != null)
 				return false;
-		} else if (!gName.equals(other.gName))
-			return false;
-		if (id != other.id)
+		} else if (!groupName.equals(other.groupName))
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Group [id=" + id + ", gId=" + gId + ", gName=" + gName + "]";
-	}
-	
+
 }

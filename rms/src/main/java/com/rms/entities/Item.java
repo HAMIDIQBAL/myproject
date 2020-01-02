@@ -12,45 +12,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 @Entity
-public class Item {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	@Column(name = "iid")
-	private String iId;
-	@Column(name = "iname")
-	private String iName;
-	@Column(name = "price")
+public class Item extends BaseEntity{
+	private String itemId;
+	private String itemName;
 	private double price;
-	@Transient
-	private String gId;
-	
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name = "G_ID") Group group;
-	 */
-	/*
-	 * @ManyToOne() Menu menu;
-	 */
-	
-	public int getId() {
-		return id;
+	public Item() {
+		super();
 	}
-	public void setId(int id) {
-		this.id = id;
+	public String getItemId() {
+		return itemId;
 	}
-	public String getiId() {
-		return iId;
+	public void setItemId(String itemId) {
+		this.itemId = itemId;
 	}
-	public void setiId(String iId) {
-		this.iId = iId;
+	public String getItemName() {
+		return itemName;
 	}
-	public String getiName() {
-		return iName;
-	}
-	public void setiName(String iName) {
-		this.iName = iName;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 	public double getPrice() {
 		return price;
@@ -59,12 +38,15 @@ public class Item {
 		this.price = price;
 	}
 	@Override
+	public String toString() {
+		return "Item [itemId=" + itemId + ", itemName=" + itemName + ", price=" + price + "]";
+	}
+	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((iId == null) ? 0 : iId.hashCode());
-		result = prime * result + ((iName == null) ? 0 : iName.hashCode());
-		result = prime * result + id;
+		int result = super.hashCode();
+		result = prime * result + ((itemId == null) ? 0 : itemId.hashCode());
+		result = prime * result + ((itemName == null) ? 0 : itemName.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -74,31 +56,24 @@ public class Item {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Item other = (Item) obj;
-		if (iId == null) {
-			if (other.iId != null)
+		if (itemId == null) {
+			if (other.itemId != null)
 				return false;
-		} else if (!iId.equals(other.iId))
+		} else if (!itemId.equals(other.itemId))
 			return false;
-		if (iName == null) {
-			if (other.iName != null)
+		if (itemName == null) {
+			if (other.itemName != null)
 				return false;
-		} else if (!iName.equals(other.iName))
-			return false;
-		if (id != other.id)
+		} else if (!itemName.equals(other.itemName))
 			return false;
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Item [id=" + id + ", iId=" + iId + ", iName=" + iName + ", price=" + price + "]";
-	}
-	
 	
 }

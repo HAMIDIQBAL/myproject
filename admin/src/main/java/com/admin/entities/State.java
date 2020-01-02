@@ -2,70 +2,51 @@ package com.admin.entities;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class State {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Integer id;
-	@Column(name = "stid")
-	String stId;
-	@Column(name = "stname")
-	String stName;
+@Table(name = "state")
+public class State extends BaseEntity {
+	@Column(name = "state_id")
+	String stateId;
+	@Column(name = "state_name")
+	String stateName;
 
 	@OneToMany(mappedBy = "state")
-	Set<City> cities;
+	private Set<City> city;
 
-	public Set<City> getCities() {
-		return cities;
+	public State() {
+		super();
 	}
 
-	public void setCities(Set<City> cities) {
-		this.cities = cities;
+	public String getStateId() {
+		return stateId;
 	}
 
-	public Integer getId() {
-		return id;
+	public void setStateId(String stateId) {
+		this.stateId = stateId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public String getStateName() {
+		return stateName;
 	}
 
-	public String getStId() {
-		return stId;
-	}
-
-	public void setStId(String stId) {
-		this.stId = stId;
-	}
-
-	public String getStName() {
-		return stName;
-	}
-
-	public void setStName(String stName) {
-		this.stName = stName;
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
 	}
 
 	@Override
 	public String toString() {
-		return "State [id=" + id + ", stId=" + stId + ", stName=" + stName + ", cities=" + cities + "]";
+		return "State [stateId=" + stateId + ", stateName=" + stateName + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cities == null) ? 0 : cities.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((stId == null) ? 0 : stId.hashCode());
-		result = prime * result + ((stName == null) ? 0 : stName.hashCode());
+		int result = super.hashCode();
+		result = prime * result + ((stateId == null) ? 0 : stateId.hashCode());
+		result = prime * result + ((stateName == null) ? 0 : stateName.hashCode());
 		return result;
 	}
 
@@ -73,34 +54,21 @@ public class State {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		State other = (State) obj;
-
-		if (cities == null) {
-			if (other.cities != null)
+		if (stateId == null) {
+			if (other.stateId != null)
 				return false;
-		} else if (!cities.equals(other.cities))
+		} else if (!stateId.equals(other.stateId))
 			return false;
-
-		if (id == null) {
-			if (other.id != null)
+		if (stateName == null) {
+			if (other.stateName != null)
 				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (stId == null) {
-			if (other.stId != null)
-				return false;
-		} else if (!stId.equals(other.stId))
-			return false;
-		if (stName == null) {
-			if (other.stName != null)
-				return false;
-		} else if (!stName.equals(other.stName))
+		} else if (!stateName.equals(other.stateName))
 			return false;
 		return true;
 	}
-
 }

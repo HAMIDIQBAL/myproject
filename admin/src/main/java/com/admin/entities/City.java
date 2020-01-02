@@ -1,59 +1,48 @@
 package com.admin.entities;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class City {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	Integer id;
-	@Column(name = "cid")
-	String cId;
-	@Column(name = "cname")
-	String cName;
-	@Transient
-	String stId;
-	
-	@ManyToOne 
-	@JoinColumn(name="st_id")
+@Table(name = "city")
+public class City extends BaseEntity {
+	@Column(name = "city_id")
+	String cityId;
+	@Column(name = "city_name")
+	String cityName;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "st_id")
 	private State state;
 
-	public Integer getId() {
-		return id;
+	@OneToMany(mappedBy = "city")
+	List<Location> location;
+
+	public City() {
+		super();
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public String getCityId() {
+		return cityId;
 	}
 
-	public String getcId() {
-		return cId;
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
 	}
 
-	public void setcId(String cId) {
-		this.cId = cId;
+	public String getCityName() {
+		return cityName;
 	}
 
-	public String getcName() {
-		return cName;
-	}
-
-	public void setcName(String cName) {
-		this.cName = cName;
-	}
-
-	public String getStId() {
-		return stId;
-	}
-
-	public void setStId(String stId) {
-		this.stId = stId;
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
 	}
 
 	public State getState() {
@@ -66,17 +55,15 @@ public class City {
 
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", cId=" + cId + ", cName=" + cName + ", stId=" + stId + ", state=" + state + "]";
+		return "City [cityId=" + cityId + ", cityName=" + cityName + ", state=" + state + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((cId == null) ? 0 : cId.hashCode());
-		result = prime * result + ((cName == null) ? 0 : cName.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((stId == null) ? 0 : stId.hashCode());
+		int result = super.hashCode();
+		result = prime * result + ((cityId == null) ? 0 : cityId.hashCode());
+		result = prime * result + ((cityName == null) ? 0 : cityName.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
@@ -85,30 +72,20 @@ public class City {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		City other = (City) obj;
-		if (cId == null) {
-			if (other.cId != null)
+		if (cityId == null) {
+			if (other.cityId != null)
 				return false;
-		} else if (!cId.equals(other.cId))
+		} else if (!cityId.equals(other.cityId))
 			return false;
-		if (cName == null) {
-			if (other.cName != null)
+		if (cityName == null) {
+			if (other.cityName != null)
 				return false;
-		} else if (!cName.equals(other.cName))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (stId == null) {
-			if (other.stId != null)
-				return false;
-		} else if (!stId.equals(other.stId))
+		} else if (!cityName.equals(other.cityName))
 			return false;
 		if (state == null) {
 			if (other.state != null)
@@ -117,7 +94,5 @@ public class City {
 			return false;
 		return true;
 	}
-	
-	
-	
-	}
+
+}

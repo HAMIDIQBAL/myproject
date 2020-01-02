@@ -10,39 +10,20 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.mapstruct.ObjectFactory;
 
 @Entity
-public class Feedback {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+@Table(name = "feedback")
+public class Feedback extends BaseEntity{
 	@Column(name = "fb")
 	private String fb;
 	@Column(name = "date")
 	private Date date;
-	@Transient
-	private String uId;
-	
-	/*
-	 * @ManyToOne
-	 * 
-	 * @JoinColumn(name = "U_ID") User user;
-	 */
-	
-	public String getuId() {
-		return uId;
-	}
-	public void setuId(String uId) {
-		this.uId = uId;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
+	public Feedback() {
+		super();
 	}
 	public String getFb() {
 		return fb;
@@ -57,19 +38,22 @@ public class Feedback {
 		this.date = date;
 	}
 	@Override
+	public String toString() {
+		return "Feedback [fb=" + fb + ", date=" + date + "]";
+	}
+	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((fb == null) ? 0 : fb.hashCode());
-		result = prime * result + id;
 		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -84,12 +68,7 @@ public class Feedback {
 				return false;
 		} else if (!fb.equals(other.fb))
 			return false;
-		if (id != other.id)
-			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Feedback [id=" + id + ", fb=" + fb + ", date=" + date + ", uId=" + uId + "]";
-	}
+	
 }
